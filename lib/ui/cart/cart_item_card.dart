@@ -11,6 +11,7 @@ class CartItemCard extends StatelessWidget {
     required this.cardItem,
     super.key,
   });
+
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -62,7 +63,7 @@ class CartItemCard extends StatelessWidget {
           ),
           title: Text(cardItem.title),
           subtitle: Text('Total:\$${(cardItem.price * cardItem.quantity)}'),
-          trailing: Text('${cardItem.quantity} X '),
+          trailing: Text('${cardItem.quantity} X'),
         ),
       ),
     );

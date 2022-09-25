@@ -5,26 +5,24 @@ import '../../models/product.dart';
 
 import 'product_detail_screen.dart';
 
-class ProductGridTile extends StatelessWidget{
-  const ProductGridTile( 
-    this.product,{
-      super.key,
-    }
-  );
+class ProductGridTile extends StatelessWidget {
+  const ProductGridTile(
+    this.product, {
+    super.key,
+  });
   final Product product;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: buildGridFooterBar(context),
         child: GestureDetector(
-          onTap: (){
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (ctx)=> ProductDetailScreen(product),
-              ),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetailScreen.routeName,
+              arguments: product.id,
             );
           },
           child: Image.network(
@@ -35,15 +33,16 @@ class ProductGridTile extends StatelessWidget{
       ),
     );
   }
-  Widget buildGridFooterBar(BuildContext context){
+
+  Widget buildGridFooterBar(BuildContext context) {
     return GridTileBar(
       backgroundColor: Colors.black87,
       leading: IconButton(
         icon: Icon(
-          product.isFavorite ? Icons.favorite: Icons.favorite_border,
+          product.isFavorite ? Icons.favorite : Icons.favorite_border,
         ),
         color: Theme.of(context).colorScheme.secondary,
-        onPressed: (){
+        onPressed: () {
           print('Toggle a favorite product');
         },
       ),
@@ -52,8 +51,8 @@ class ProductGridTile extends StatelessWidget{
         textAlign: TextAlign.center,
       ),
       trailing: IconButton(
-        icon: const Icon( Icons.shopping_cart),
-        onPressed: (){
+        icon: const Icon(Icons.shopping_cart),
+        onPressed: () {
           print('Add item to cart');
         },
         color: Theme.of(context).colorScheme.secondary,

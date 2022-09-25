@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'user_product_list_tile.dart';
 import 'products_manager.dart';
 
-class UserProductsScreen extends StatelessWidget{
+class UserProductsScreen extends StatelessWidget {
+  static const routeName = '/user-products';
   const UserProductsScreen({super.key});
-  @override 
-  Widget build(BuildContext context){
+  @override
+  Widget build(BuildContext context) {
     final productsManager = ProductManager();
     return Scaffold(
       appBar: AppBar(
@@ -16,27 +17,30 @@ class UserProductsScreen extends StatelessWidget{
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: ()async=>print('refresh products'),
+        onRefresh: () async => print('refresh products'),
         child: buildUserProductListView(productsManager),
       ),
     );
   }
-  Widget buildUserProductListView(ProductManager productManager){
+
+  Widget buildUserProductListView(ProductManager productManager) {
     return ListView.builder(
       itemCount: productManager.itemCount,
-      itemBuilder: (ctx, i)=>Column(
+      itemBuilder: (ctx, i) => Column(
         children: [
-          UserProductListTile(productManager.items[i],
+          UserProductListTile(
+            productManager.items[i],
           ),
           const Divider(),
         ],
       ),
     );
   }
-  Widget buildAddButton(){
+
+  Widget buildAddButton() {
     return IconButton(
       icon: const Icon(Icons.add),
-      onPressed: (){
+      onPressed: () {
         print('Go to edit product screen');
       },
     );

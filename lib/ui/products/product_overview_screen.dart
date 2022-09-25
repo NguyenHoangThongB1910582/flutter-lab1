@@ -1,48 +1,50 @@
-
 import 'package:flutter/material.dart';
+import '../cart/cart_screen.dart';
 import 'products_grid.dart';
+import '../shared/app_drawer.dart';
 
-enum FilterOptions {favorites, all}
+enum FilterOptions { favorites, all }
 
-class ProductsOverviewScreen extends StatefulWidget{
+class ProductsOverviewScreen extends StatefulWidget {
   const ProductsOverviewScreen({super.key});
 
-  @override 
+  @override
   State<ProductsOverviewScreen> createState() => _ProductsOverviewScreen();
 }
-class _ProductsOverviewScreen extends State<ProductsOverviewScreen>{
+
+class _ProductsOverviewScreen extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
 
-  @override 
-  Widget build(BuildContext context){
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MyShop'),
-        actions: <Widget>[
-          buildProductFilterMenu(),
-          buildShoppingCartIcon()
-        ],
+        actions: <Widget>[buildProductFilterMenu(), buildShoppingCartIcon()],
       ),
-    body: ProductsGrid(_showOnlyFavorites),
+      drawer: const AppDrawer(),
+      body: ProductsGrid(_showOnlyFavorites),
     );
   }
-  Widget buildShoppingCartIcon(){
+
+  Widget buildShoppingCartIcon() {
     return IconButton(
       icon: const Icon(
         Icons.shopping_cart,
       ),
-      onPressed: (){
-        print('Go to cart screen');
+      onPressed: () {
+        Navigator.of(context).pushNamed(CartScreen.routeName);
       },
     );
   }
-  Widget buildProductFilterMenu(){
+
+  Widget buildProductFilterMenu() {
     return PopupMenuButton(
-      onSelected: (FilterOptions selectedValue){
-        setState((){
-          if(selectedValue == FilterOptions.favorites){
+      onSelected: (FilterOptions selectedValue) {
+        setState(() {
+          if (selectedValue == FilterOptions.favorites) {
             _showOnlyFavorites = true;
-          }else{
+          } else {
             _showOnlyFavorites = false;
           }
         });

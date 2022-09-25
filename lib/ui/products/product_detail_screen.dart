@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import '../../models/product.dart';
 
 class ProductDetailScreen extends StatelessWidget {
+  static const routeName = '/product-detail';
   const ProductDetailScreen(
     this.product, {
     super.key,
   });
   final Product product;
 
-  @override 
-  Widget build(BuildContext context){
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
