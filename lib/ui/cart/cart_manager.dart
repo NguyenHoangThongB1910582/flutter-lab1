@@ -1,16 +1,13 @@
-import '../../models/cart_item.dart';
+import 'package:myshop/models/product.dart';
 import 'package:flutter/foundation.dart';
+import '../../models/cart_item.dart';
 import '../../models/product.dart';
 
 class CartManager with ChangeNotifier {
   Map<String, CartItem> _items = {
-    'p1': CartItem(
-      id: 'c1',
-      title: 'Red Shirt',
-      price: 29.99,
-      quantity: 2,
-    ),
+    'p1': CartItem(id: 'c1', title: 'Red Shirt', quantity: 2, price: 29.99),
   };
+
   int get productCount {
     return _items.length;
   }
@@ -33,7 +30,6 @@ class CartManager with ChangeNotifier {
 
   void addItem(Product product) {
     if (_items.containsKey(product.id)) {
-// change quantity...
       _items.update(
         product.id!,
         (existingCartItem) => existingCartItem.copyWith(
@@ -44,11 +40,10 @@ class CartManager with ChangeNotifier {
       _items.putIfAbsent(
         product.id!,
         () => CartItem(
-          id: 'c${DateTime.now().toIso8601String()}',
-          title: product.title,
-          price: product.price,
-          quantity: 1,
-        ),
+            id: 'c${DateTime.now().toIso8601String()}',
+            title: product.title,
+            quantity: 1,
+            price: product.price),
       );
     }
     notifyListeners();
@@ -66,8 +61,8 @@ class CartManager with ChangeNotifier {
     if (_items[productId]?.quantity as num > 1) {
       _items.update(
         productId,
-        (existingCartIem) => existingCartIem.copyWith(
-          quantity: existingCartIem.quantity - 1,
+        (existingCartItem) => existingCartItem.copyWith(
+          quantity: existingCartItem.quantity - 1,
         ),
       );
     } else {

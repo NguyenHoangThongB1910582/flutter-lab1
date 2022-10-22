@@ -1,7 +1,8 @@
-import '../../models/product.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import '../../models/product.dart';
 
-class ProductManager with ChangeNotifier {
+class ProductsManager with ChangeNotifier {
   final List<Product> _items = [
     Product(
       id: 'p1',
@@ -72,7 +73,7 @@ class ProductManager with ChangeNotifier {
     }
   }
 
-  void toggleFavoriteStatus(Product product) {
+  void togglefavoriteStatus(Product product) {
     final savedStatus = product.isFavorite;
     product.isFavorite = !savedStatus;
   }
