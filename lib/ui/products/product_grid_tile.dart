@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 import 'product_detail_screen.dart';
+import 'products_manager.dart';
 
 class ProductGridTile extends StatelessWidget {
   const ProductGridTile(
@@ -40,14 +41,13 @@ class ProductGridTile extends StatelessWidget {
         valueListenable: product.isFavoriteListenable,
         builder: (ctx, isFavorite, child) {
           return IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-            ),
-            color: Theme.of(context).colorScheme.secondary,
-            onPressed: () {
-              product.isFavorite = !isFavorite;
-            },
-          );
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              color: Theme.of(context).colorScheme.secondary,
+              onPressed: () {
+                ctx.read<ProductsManager>().toggleFavoriteStatus(product);
+              });
         },
       ),
       title: Text(

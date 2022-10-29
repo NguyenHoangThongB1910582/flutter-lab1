@@ -5,13 +5,16 @@ import '../../models/order_item.dart';
 
 class OrderItemCard extends StatefulWidget {
   final OrderItem order;
+
   const OrderItemCard(this.order, {super.key});
+
   @override
   State<OrderItemCard> createState() => _OrderItemCardState();
 }
 
 class _OrderItemCardState extends State<OrderItemCard> {
   var _expanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
